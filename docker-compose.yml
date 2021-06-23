@@ -1,0 +1,22 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: './multer-be'
+      dockerfile: Dockerfile
+    ports:
+       - 5000:5000
+    image: multer-be:latest
+    container_name: file-upload-be
+    network_mode: "host"
+  frontend:
+    build:
+      context: './fe'
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - 8080:8080
+    image: upload-fe:latest
+    container_name: file-upload-fe
+    network_mode: "host"
